@@ -1,12 +1,16 @@
+const http = require('http');
 
-const Logger = require("./logger")
-const logger = new Logger();
+const server = http.createServer(((req, res) => {
+    if (req.url === '/'){
+        res.write('hello word');
+        res.end();
+    }
+    if (req.url === '/api/viet'){
+        res.write(JSON.stringify([1,2,3,4]));
+        res.end();
+    }
+}));
 
-logger.log("message");
-
-
-logger.on('messageLogger', (args) => {
-    console.log('Listener event called',args)
-})
+server.listen(3000);
 
 
